@@ -81,6 +81,14 @@ switch ($accion) {
 <!--tarjeta de registro-->
 <!--formulario-->   
         <form method= "post" enctype= "multipart/form-data">
+
+        
+        <button type= "submit" name= "accion"  value= "Registrar" class= "btn btn-success" style= "Margin:8px" >Registrar</button>
+        <button type= "submit" name= "accion"  value= "Modificar" class= "btn btn-warning" style= "Margin:8px" >Modificar</button>
+        <button type= "submit" name= "accion"  value= "Eliminar" class= "btn btn-info" style= "Margin:8px" >Eliminar</button>
+        <input type= "text" style= "Margin:8px"/>
+        <input type= "submit" name= "accion" value= "Buscar" class= "btn btn-primary" style= "Margin:8px" />
+
         <div class= "form-group">
         <label for= "exampleInputEmail1">Nombres completos:</label>
         <input type= "text" required class= "form-control" name= "Nombres_cliente" value="<?php echo $Nombres_cliente;?>" id= "Nombres_cliente" aria-describedby= "emailHelp" placeholder= "Digite nombres">
@@ -114,11 +122,6 @@ switch ($accion) {
         <!--botones de formulario-->
 
     
-        <button type= "submit" name= "accion"  value= "Registrar" class= "btn btn-success" style= "Margin:8px" >Registrar</button>
-        <button type= "submit" name= "accion"  value= "Modificar" class= "btn btn-warning" style= "Margin:8px" >Modificar</button>
-        <button type= "submit" name= "accion"  value= "Eliminar" class= "btn btn-info" style= "Margin:8px" >Eliminar</button>
-        <input type= "text" style= "Margin:8px"/>
-        <input type= "submit" name= "accion" value= "Buscar" class= "btn btn-primary" style= "Margin:8px" />
 </form>
 <?php
 /*consulta de todo los datos en la base de datos-- Tabla principal*/
