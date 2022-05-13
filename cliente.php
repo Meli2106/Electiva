@@ -8,8 +8,12 @@
     $Cedula_cliente =(isset($_POST['Cedula_cliente']))? $_POST['Cedula_cliente']:"";
     $Direccion_cliente =(isset($_POST['Direccion_cliente']))? $_POST['Direccion_cliente']:"";
     $Contacto_cliente =(isset($_POST['Contacto_cliente']))? $_POST['Contacto_cliente']:"";
-
     $accion =(isset($_POST['accion']))? $_POST['accion']:"";
+
+    $accionRegistrar= "";
+    $accionModificar=$accionEliminar=$accionCancelar= "disabled";
+    $mostrarvista=false;
+
 
 switch ($accion) {
     /*SQL en la base de datos,registro de datos*/
@@ -23,6 +27,7 @@ switch ($accion) {
     $sql ->bindParam(':Direccion_cliente',$Direccion_cliente);
     $sql ->bindParam(':Contacto_cliente',$Contacto_cliente);
     $sql ->execute();
+    header("Location:cliente.php");
     break;
 
     /*SQL en la base de datos,modificar de datos*/
@@ -44,6 +49,7 @@ switch ($accion) {
         $sql =$conexion->prepare("DELETE FROM cliente WHERE Cedula_cliente =:Cedula_cliente");
         $sql ->bindParam(':Cedula_cliente',$Cedula_cliente);
         $sql ->execute();
+        header("Location:cliente.php");
     break;
 
     /*SQL en la base de datos,buscar de datos*/
@@ -61,13 +67,17 @@ switch ($accion) {
         $Contacto_cliente =$Buscar_clientes['Contacto_cliente'];
     break;
 
-    case "Cancelar":
+    case "Seleccionar":
+        $accionRegistrar= "disabled";
+        $accionModificar=$accionEliminar=$accionCancelar= "";
+        $mostrarvista=true;
+    break;
 
-        header('detallecliente.php');
+    case "Cancelar":
+    header("Location:cliente.php");
     break;
 
 }?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -78,17 +88,24 @@ switch ($accion) {
     <title>Maderas Rivillas</title>
 </head>
 <body>
-<!--tarjeta de registro-->
-<!--formulario-->   
+<!--formulario de registro-->   
         <form method= "post" enctype= "multipart/form-data">
-
-        
-        <button type= "submit" name= "accion"  value= "Registrar" class= "btn btn-success" style= "Margin:8px" >Registrar</button>
-        <button type= "submit" name= "accion"  value= "Modificar" class= "btn btn-warning" style= "Margin:8px" >Modificar</button>
-        <button type= "submit" name= "accion"  value= "Eliminar" class= "btn btn-info" style= "Margin:8px" >Eliminar</button>
         <input type= "text" style= "Margin:8px"/>
         <input type= "submit" name= "accion" value= "Buscar" class= "btn btn-primary" style= "Margin:8px" />
 
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Registro Cliente Nuevo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">
+        <div class="form-row" >
+        
         <div class= "form-group">
         <label for= "exampleInputEmail1">Nombres completos:</label>
         <input type= "text" required class= "form-control" name= "Nombres_cliente" value="<?php echo $Nombres_cliente;?>" id= "Nombres_cliente" aria-describedby= "emailHelp" placeholder= "Digite nombres">
@@ -117,11 +134,27 @@ switch ($accion) {
         <div class= "form-group">
         <label for= "exampleInputEmail1">Contacto:</label>
         <input type= "text"  required class= "form-control" name= "Contacto_cliente" value="<?php echo $Contacto_cliente;?>" id= "Contacto_cliente" aria-describedby= "emailHelp" placeholder= "Digite numero de celular">
+        </div>  
+
+        </div>
         </div>
 
+        <div class="modal-footer">
         <!--botones de formulario-->
 
+        <button type= "submit" name= "accion"  value= "Registrar" <?php echo $accionRegistrar;?> class= "btn btn-success" style= "Margin:8px" >Registrar</button>
+        <button type= "submit" name= "accion"  value= "Modificar" <?php echo $accionModificar;?> class= "btn btn-warning" style= "Margin:8px" >Modificar</button>
+        <button type= "submit" name= "accion"  value= "Eliminar"  <?php echo $accionEliminar;?> class= "btn btn-danger" style= "Margin:8px" >Eliminar</button>
+        <button type= "submit" name= "accion"  value= "Cancelar"  <?php echo $accionCancelar;?> class= "btn btn-primary" style= "Margin:8px" >Cancelar</button>
     
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Button trigger modal -->   
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Registrar Cliente
+        </button>
 </form>
 <?php
 /*consulta de todo los datos en la base de datos-- Tabla principal*/
@@ -156,24 +189,30 @@ switch ($accion) {
                 <th>
             <form action= "" method= "post"><!--Boton Seleccionar-->
                 
-                <input type="hidden" name="Nombres_cliente" value=<?php echo $cliente['Nombres_cliente'];?>>
-                <input type="hidden" name="Apellidos_cliente" value=<?php echo $cliente['Apellidos_cliente'];?>>
-                <input type="hidden" name="Tdocumento_cliente" value=<?php echo $cliente['Tdocumento_cliente'];?>>
-                <input type="hidden" name="Cedula_cliente" value=<?php echo $cliente['Cedula_cliente'];?>>
-                <input type="hidden" name="Direccion_cliente" value=<?php echo $cliente['Direccion_cliente'];?>>
-                <input type="hidden" name="Contacto_cliente" value=<?php echo $cliente['Contacto_cliente'];?>>
+                <input type="hidden" name="Nombres_cliente" value="<?php echo $cliente['Nombres_cliente'];?>">
+                <input type="hidden" name="Apellidos_cliente" value="<?php echo $cliente['Apellidos_cliente'];?>">
+                <input type="hidden" name="Tdocumento_cliente" value="<?php echo $cliente['Tdocumento_cliente'];?>">
+                <input type="hidden" name="Cedula_cliente" value="<?php echo $cliente['Cedula_cliente'];?>">
+                <input type="hidden" name="Direccion_cliente" value="<?php echo $cliente['Direccion_cliente'];?>">
+                <input type="hidden" name="Contacto_cliente" value="<?php echo $cliente['Contacto_cliente'];?>">
 
                 <input type="submit" value="Seleccionar" name ="accion">
                 <button type= "submit" name= "accion"  value= "Eliminar" class= "btn btn-info" style= "Margin:8px" >Eliminar</button>
             
-            </th>
-
-            </form>    
-                
+        </th>    
+            
             </tr>
         <?php } ?>
     </table>
+    </form> 
 </div>
+        <?php if($mostrarvista){?>
+        <script>
+            $('#exampleModal').modal('show');
+            header("Location:cliente.php");
+        </script>
+        <?php }?>
+
 </body>
 </html>
 

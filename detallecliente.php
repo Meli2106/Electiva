@@ -10,10 +10,6 @@ $Contacto_cliente =(isset($_POST['Contacto_cliente']))? $_POST['Contacto_cliente
 
 $accion =(isset($_POST['accion']))? $_POST['accion']:"";
 
-$accionRegistrarcliente= "";
-$accionModificarcliente=$accionBorrarcliente=$accionCancelarcliente= "";
-$mostravista=false;
-
 
 ?>
 <!--botones y formulario de crud-->

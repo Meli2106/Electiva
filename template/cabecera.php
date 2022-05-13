@@ -6,12 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maderas Rivillas</title>
     <link rel="stylesheet" href="./CSS/bootstrap.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+
 </head>
 <body>
+<style>
+    a.nav-link {
+        color: white !important
+    }
+
+    a.nav-link:hover {
+        color: black !important
+    }
+</style>
+
     <!--menucabecera-->
-    <h1>Maderas Rivillas</h1>
     <nav class="navbar navbar-expand lg navbar-dark bg-primary">
-        <ul class="nav navbar-nav">
+    <img src="Img/logo.png" style="width:100px; margin-left: 12px">
+        <ul class="nav navbar-nav" style= "color: white">
             <li class="nav-item">
                 <a class="nav-link" href="#" style="font-family: courier;"></a>
             </li>

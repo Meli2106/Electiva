@@ -4,8 +4,7 @@
 <?php 
 session_start();
 session_destroy();
-header('Location:login.php');
+header('Location:index.php');
 ?>
-    </div>
-</div>
+
 <?php include ("template/footer.php");?> <!--footer-->

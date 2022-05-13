@@ -1,16 +1,6 @@
 <?php include ("conexion.php"); ?><!--conexion a la base de datos-->
 <?php include ("template/cabecera.php");?> <!--menucabecera-->
 
-<div style="text-align:center"><!--menu de crud-->
-    <div class= "btn-group" role= "group" aria-label="">
-        <button type= "submit" name= "accion" value= "Registrar_Producto" class= "btn btn-success" style= "Margin:8px">Registrar Producto</button>
-        <button type= "submit" name= "accion" value= "Modificar_Producto" class= "btn btn-warning" style= "Margin:8px">Modificar Producto</button>
-        <button type= "submit" name= "accion" value= "Borrar_Producto" class= "btn btn-info" style= "Margin:8px">Borrar Prodcuto</button>
-        <input type= "text" name= "Cedula_cliente" id= "Cedula_cliente" style= "Margin:8px"/>
-        <button type= "text" name= "accion" value= "Buscar_Producto" class= "btn btn-info" style= "Margin:8px">Buscar Producto</button>
-    </div> 
-</div><br>
-
 <?php
 $Nombre_Producto =(isset($_POST['Nombre_Producto']))? $_POST['Nombre_Producto']:"";
 $Detalle_Producto =(isset($_POST['Detalle_Producto']))? $_POST['Detalle_Producto']:"";
